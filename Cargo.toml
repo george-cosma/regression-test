@@ -1,0 +1,8 @@
+[workspace]
+resolver = "3"
+
+members = [
+    "regression-test",
+    "regression-test-macros",
+    "example-lib",
+]
