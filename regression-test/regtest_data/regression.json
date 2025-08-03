@@ -1,0 +1,10 @@
+[
+  {
+    "type": "display",
+    "message": "some output"
+  },
+  {
+    "type": "debug",
+    "message": "[1, 2, 3]"
+  }
+]

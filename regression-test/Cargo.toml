@@ -2,6 +2,13 @@
 name = "regression-test"
 version = "0.1.0"
 edition = "2024"
+authors = ["george-cosma"]
+description = "A Rust library for regression testing"
+license = "MIT"
+repository = "https://github.com/george-cosma/regression-test"
+readme = "../README.md"
+keywords = ["regression", "testing"]
+categories = ["development-tools", "development-tools::testing"]
 
 [dependencies]
 serde = { version = "1.0.219", features = ["derive"] }

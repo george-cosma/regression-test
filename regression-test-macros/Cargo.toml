@@ -2,6 +2,13 @@
 name = "regression-test-macros"
 version = "0.1.0"
 edition = "2024"
+authors = ["george-cosma"]
+description = "Helper macros for the regression-test library"
+license = "MIT"
+repository = "https://github.com/george-cosma/regression-test"
+readme = "../README.md"
+keywords = ["regression", "testing", "macros"]
+categories = ["development-tools", "development-tools::testing"]
 
 [lib]
 proc-macro = true

@@ -1,3 +1,5 @@
+//! Regression testing utilities
+
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Display};
 use std::fs::OpenOptions;
@@ -28,6 +30,27 @@ enum Mode {
     Read,
 }
 
+/// `RegTest` is a utility for regression testing by recording and comparing test outputs.
+///
+/// This struct manages regression test data in two modes:
+/// - **Write mode**: Captures and stores test output data to a file for future regression runs.
+/// - **Read mode**: Loads previously recorded regression data and compares it with current test output,
+///   reporting any mismatches or differences.
+///
+/// # Usage
+/// - Use [`RegTest::new`] to create a new instance, specifying the file path for regression data.
+/// - Use [`regtest`] and [`regtest_dbg`] methods to record or compare values in Display or Debug format.
+/// - When dropped, if in write mode, the struct writes all buffered entries to the specified file.
+///
+/// # Example
+/// ```rust
+/// use regression_test::RegTest;
+///
+/// let mut regtest = RegTest::new("./regtest_data/regression.json").unwrap();
+/// regtest.regtest("some output");
+/// regtest.regtest_dbg(vec![1, 2, 3]);
+/// // Data is written to file when regtest goes out of scope.
+/// ```
 pub struct RegTest {
     /// File path to the regression test output
     file_path: PathBuf,

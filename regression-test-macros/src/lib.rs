@@ -1,7 +1,59 @@
+//! # regression-test-macros
+//!
+//! This crate provides procedural macros to support regression testing in Rust projects.
+//! The main macro, `regtest`, is an attribute macro designed to be applied to test functions.
+//! It automatically generates boilerplate code for managing regression test data files,
+//! ensuring that each test has a dedicated file for storing and comparing results.
+//!
+//! ## Features
+//! - Automatically determines and creates the appropriate file path for regression data
+//!   based on the test's source location (unit or integration test).
+//! - Handles compatibility with tools like rust-analyzer.
+//!
+//! ## Usage
+//!
+//! ```rust
+//! use regression_test_macros::regtest;
+//! use regression_test::RegTest;
+//!
+//! #[regtest]
+//! fn my_regression_test(rt: RegTest) {
+//!     // Test logic here
+//!     rt.regtest("some output");
+//!     rt.regtest_dbg(vec![1, 2, 3]);
+//! }
+//! ```
+//!
+//! The macro will ensure that a regression data file is created and passed to the test
+//! via the `RegTest` argument.
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{ItemFn, parse_macro_input};
 
+/// Attribute macro for regression tests.
+///
+/// This macro should be applied to test functions whose first argument is of type `RegTest`.
+/// It generates a `#[test]` function that automatically manages the file path for regression
+/// test data, creating the necessary directories and passing a `RegTest` instance to the test.
+///
+/// # Requirements
+/// - The first argument of the function must be of type `RegTest`.
+///
+/// # Example
+/// ```rust
+/// use regression_test::RegTest;
+/// use regression_test_macros::regtest;
+///
+/// #[regtest]
+/// fn my_test(rt: RegTest) {
+///     // Test logic
+///     rt.regtest("some output");
+///     rt.regtest_dbg(vec![1, 2, 3]);
+/// }
+/// ```
+///
+/// The macro will inject code to determine the appropriate file path for the regression data,
+/// create the file if necessary, and pass a `RegTest` instance to the test function.
 #[proc_macro_attribute]
 pub fn regtest(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input_fn = parse_macro_input!(item as ItemFn);
