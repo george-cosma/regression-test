@@ -9,6 +9,7 @@ repository = "https://github.com/george-cosma/regression-test"
 readme = "../README.md"
 keywords = ["regression", "testing", "macros"]
 categories = ["development-tools", "development-tools::testing"]
+exclude = ["regtest_data/*"]
 
 [lib]
 proc-macro = true

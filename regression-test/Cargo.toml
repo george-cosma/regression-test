@@ -9,6 +9,7 @@ repository = "https://github.com/george-cosma/regression-test"
 readme = "../README.md"
 keywords = ["regression", "testing"]
 categories = ["development-tools", "development-tools::testing"]
+exclude = ["regtest_data/*"]
 
 [dependencies]
 serde = { version = "1.0.219", features = ["derive"] }
